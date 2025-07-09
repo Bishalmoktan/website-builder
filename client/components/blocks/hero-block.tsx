@@ -1,0 +1,71 @@
+import { Block } from "@/types";
+import { ArrowRight } from "lucide-react";
+
+interface HeroBlockProps {
+  block: Block;
+}
+
+export default function HeroBlock({ block }: HeroBlockProps) {
+  const { content, style } = block;
+
+  return (
+    <div
+      className="relative overflow-hidden bg-gray-900"
+      style={{ height: style.height || "100vh" }}
+    >
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url(${content.backgroundImage})`,
+        }}
+      />
+
+      {/* Overlay */}
+      <div
+        className="absolute inset-0 bg-black"
+        style={{ opacity: style.overlayOpacity || 0.4 }}
+      />
+
+      {/* Content */}
+      <div className="relative z-10 flex items-center justify-center h-full">
+        <div className="text-center px-6 max-w-4xl">
+          <h1
+            className="text-4xl md:text-6xl font-bold mb-6 leading-tight"
+            style={{
+              color: style.textColor || "#ffffff",
+              textAlign: style.alignment || "center",
+            }}
+          >
+            {content.title}
+          </h1>
+
+          {content.subtitle && (
+            <p
+              className="text-xl md:text-2xl mb-8 opacity-90 max-w-2xl mx-auto"
+              style={{
+                color: style.textColor || "#ffffff",
+                textAlign: style.alignment || "center",
+              }}
+            >
+              {content.subtitle}
+            </p>
+          )}
+
+          {content.buttonText && (
+            <a
+              href={content.buttonLink || "#"}
+              className="inline-flex items-center px-8 py-4 bg-sky-600 hover:bg-sky-700 text-white font-semibold rounded-lg transition-colors duration-200 group"
+            >
+              {content.buttonText}
+              <ArrowRight
+                size={20}
+                className="ml-2 group-hover:translate-x-1 transition-transform"
+              />
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
