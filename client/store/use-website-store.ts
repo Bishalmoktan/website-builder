@@ -6,13 +6,11 @@ import { Block, Website, User, Theme } from "../types";
 interface WebsiteStore {
   currentWebsite: Website | null;
   selectedBlock: Block | null;
-  user: User | null;
   isPreviewMode: boolean;
 
   // Actions
   setCurrentWebsite: (website: Website | null) => void;
   setSelectedBlock: (block: Block | null) => void;
-  setUser: (user: User | null) => void;
   togglePreviewMode: () => void;
 
   // Block actions
@@ -50,10 +48,6 @@ const useWebsiteStore = create<WebsiteStore>()(
     setSelectedBlock: (block) =>
       set((state) => {
         state.selectedBlock = block;
-      }),
-    setUser: (user) =>
-      set((state) => {
-        state.user = user;
       }),
     togglePreviewMode: () =>
       set((state) => {

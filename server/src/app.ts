@@ -6,12 +6,18 @@ import express, { Express, Request, Response } from "express";
 import { rootRouter } from "./modules/root.router";
 import { globalErrorHandler } from "./middlewares/globalErrorHandler";
 import { isAuthenticated } from "./middlewares/isAuthenticated";
+import config from "./config";
 
 dotenv.config();
 
 const app: Express = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: config.cors.origin,
+    credentials: true,
+  })
+);
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
