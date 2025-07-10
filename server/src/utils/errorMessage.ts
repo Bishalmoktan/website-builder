@@ -5,6 +5,7 @@ const errorResponse = {
   AUTH: {
     DUPLICATE_USER: "User already exists.",
     INVALID_PASSOWRD: "Invalid email or password.",
+    NOT_FOUND: "The specified user does not exist in our system.",
   },
   VALIDATION: {
     FAILED:
@@ -16,6 +17,12 @@ const errorResponse = {
   },
   TOKEN: {
     EXPIRED: "Your session has expired. Please log in again to continue.",
+  },
+  MESSAGES: {
+    INVALID_REQUEST: "Invalid Message ID",
+    NOT_FOUND: "Message not found",
+    UNAUTHORIZED: "Access denied.",
+    INVALID_INPUT: "Content is required.",
   },
 };
 

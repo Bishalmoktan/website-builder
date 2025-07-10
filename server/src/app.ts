@@ -21,11 +21,6 @@ app.get("/health-check", (req: Request, res: Response) => {
 });
 
 app.use("/api/v1", rootRouter);
-app.use("/api/v1/test", isAuthenticated, (req, res) => {
-  res.json({
-    message: "Authorized",
-  });
-});
 
 app.use(globalErrorHandler);
 

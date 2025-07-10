@@ -9,7 +9,7 @@ const envSchema = z.object({
     .enum(["development", "production", "test"])
     .default("development"),
   CLIENT_BASE_URL: z.string().url(),
-  DATABASE_URL: z.string().startsWith("mongodb+srv://"),
+  DATABASE_URL: z.string().startsWith("mongodb"),
   JWT_SECRET: z.string(),
 });
 

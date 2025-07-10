@@ -39,6 +39,10 @@ export const signin = async (data: SignInInput) => {
   return { user, token };
 };
 
-export const logoutUser = () => {
-  return { message: "Logged out" };
+export const getMe = async (userId: string) => {
+  const user = await User.findOne({ _id: userId }).populate("websites");
+  if (!user) {
+    throw new ApiError(StatusCodes.BAD_REQUEST, errorResponse.AUTH.NOT_FOUND);
+  }
+  return user;
 };

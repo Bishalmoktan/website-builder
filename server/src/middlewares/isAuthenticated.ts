@@ -25,9 +25,10 @@ export const isAuthenticated = async (
         errorResponse.AUTH_HEADER.MISSING
       );
 
-    const decoded = jwt.verify(token, config.jwt.secret || "supersecret") as {
-      _id: string;
-    };
+    const decoded = jwt.verify(
+      token,
+      config.jwt.secret || "supersecret"
+    ) as jwt.JwtPayload;
     const user = await User.findById(decoded._id);
 
     if (!user)

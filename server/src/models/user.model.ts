@@ -18,7 +18,7 @@ const UserSchema = new Schema<IUser>({
   email: { type: String, required: true, unique: true },
   name: { type: String, required: true },
   password: { type: String, required: true, select: false },
-  websites: [WebsiteSchema],
+  websites: [{ type: Schema.Types.ObjectId, ref: "Website" }],
 });
 
 UserSchema.methods.generateAuthTokens = function (): string {

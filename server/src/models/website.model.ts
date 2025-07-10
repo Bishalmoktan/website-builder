@@ -1,11 +1,35 @@
-import mongoose, { Schema } from "mongoose";
-import { ThemeSchema } from "./theme.model";
-import { BlockSchema } from "./block.model";
+import mongoose, { Schema, Document } from "mongoose";
 
-export const WebsiteSchema = new Schema({
-  title: { type: String, required: true },
-  blocks: [BlockSchema],
-  theme: ThemeSchema,
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now },
+const BlockSchema = new Schema({
+  id: { type: String, required: true },
+  type: { type: String, required: true },
+  content: { type: Schema.Types.Mixed },
+  style: { type: Schema.Types.Mixed },
 });
+
+const ThemeSchema = new Schema({
+  primaryColor: String,
+  secondaryColor: String,
+  fontFamily: String,
+  backgroundColor: String,
+});
+
+export interface IWebsite extends Document {
+  title: string;
+  blocks: (typeof BlockSchema)[];
+  theme: typeof ThemeSchema;
+  user: mongoose.Types.ObjectId;
+}
+
+export const WebsiteSchema = new Schema<IWebsite>(
+  {
+    title: { type: String, required: true },
+    blocks: [BlockSchema],
+    theme: ThemeSchema,
+    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  },
+  { timestamps: true }
+);
+
+const Website = mongoose.model<IWebsite>("Website", WebsiteSchema);
+export default Website;
