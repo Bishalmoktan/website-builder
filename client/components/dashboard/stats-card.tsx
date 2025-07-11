@@ -1,14 +1,6 @@
 "use client";
-import { useState } from "react";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Eye, Globe, Users } from "lucide-react";
 import useWebsiteStore from "@/store/use-website-store";
 

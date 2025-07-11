@@ -1,4 +1,3 @@
-import { Globe } from "lucide-react";
 import Logo from "../logo";
 
 export default function Footer() {

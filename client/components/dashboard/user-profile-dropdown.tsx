@@ -1,26 +1,16 @@
 "use client";
 
-import {
-  ArchiveRestore,
-  ChevronDown,
-  LogOut,
-  UserCircle,
-  UserCircle2,
-} from "lucide-react";
+import { ChevronDown, LogOut } from "lucide-react";
 
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useState } from "react";
-import Link from "next/link";
 import { useUserStore } from "@/store/use-user-store";
 import { logout } from "@/lib/service/auth.service";
 

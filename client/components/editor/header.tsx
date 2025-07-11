@@ -1,12 +1,5 @@
 import useWebsiteStore from "@/store/use-website-store";
-import {
-  Play,
-  Save,
-  Settings,
-  Download,
-  Edit,
-  ExternalLink,
-} from "lucide-react";
+import { Play, Save, Download, Edit, ExternalLink } from "lucide-react";
 import Logo from "../logo";
 import { updateWesbite } from "@/lib/service/website.service";
 import { toast } from "sonner";

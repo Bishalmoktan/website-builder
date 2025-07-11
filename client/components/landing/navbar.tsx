@@ -1,4 +1,4 @@
-import { ArrowRight, Globe } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";

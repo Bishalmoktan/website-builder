@@ -1,10 +1,4 @@
-import {
-  DndContext,
-  DragEndEvent,
-  DragOverEvent,
-  DragStartEvent,
-} from "@dnd-kit/core";
-import { arrayMove } from "@dnd-kit/sortable";
+import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import useWebsiteStore from "@/store/use-website-store";
 import { blockTypes } from "@/data/block-types";
 import { Block } from "@/types";

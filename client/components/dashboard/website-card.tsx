@@ -1,12 +1,5 @@
 import { Website } from "@/types";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
@@ -18,6 +11,7 @@ import { Button } from "../ui/button";
 import { Calendar, Edit, Eye, MoreVertical, Trash2 } from "lucide-react";
 import { useUserStore } from "@/store/use-user-store";
 import Link from "next/link";
+import Image from "next/image";
 
 interface WebsiteCardProps {
   website: Website;
@@ -42,7 +36,7 @@ export default function WebsiteCard({ website }: WebsiteCardProps) {
       className="group hover:shadow-xl transition-all duration-300 bg-white/80 backdrop-blur-sm border-gray-200 overflow-hidden"
     >
       <div className="relative">
-        <img
+        <Image
           src={randomImage() || "/placeholder.svg"}
           alt={website.title}
           className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
