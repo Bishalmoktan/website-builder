@@ -25,6 +25,7 @@ export const signUp = async (req: Request, res: Response) => {
         httpOnly: true,
         secure: config.app.isProduction,
         maxAge: 7 * 24 * 60 * 60 * 1000,
+        sameSite: "none",
       })
       .json({
         message: "Signup successful",
@@ -53,6 +54,7 @@ export const signIn = async (req: Request, res: Response) => {
         httpOnly: true,
         secure: config.app.isProduction,
         maxAge: 7 * 24 * 60 * 60 * 1000,
+        sameSite: "none",
       })
       .json({
         message: "Signin successful",
@@ -67,7 +69,7 @@ export const logout = async (req: Request, res: Response) => {
   res.clearCookie("token", {
     httpOnly: true,
     secure: config.app.isProduction,
-    sameSite: "strict",
+    sameSite: "none",
   });
 
   res.status(200).json({
