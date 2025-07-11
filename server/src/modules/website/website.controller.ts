@@ -52,7 +52,10 @@ export const getAllWebsites = async (req: Request, res: Response) => {
 export const getWebsiteById = async (req: Request, res: Response) => {
   try {
     const website = await websiteService.getWebsiteById(req.params.id);
-    if (!website || website.user.toString() !== res.locals.user._id.toString())
+    if (
+      !website?.isPublished &&
+      (!website || website.user.toString() !== res.locals.user._id.toString())
+    )
       throw new ApiError(
         StatusCodes.UNAUTHORIZED,
         errorResponse.MESSAGES.UNAUTHORIZED

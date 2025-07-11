@@ -10,7 +10,7 @@ export const createWebsite = async (
 };
 
 export const getAllWebsites = async () => {
-  return await Website.find({ where: { isPublished: true } });
+  return await Website.find({ isPublished: true });
 };
 
 export const getUserWebsites = async (userId: string) => {

@@ -88,8 +88,14 @@ export default function WebsiteCard({ website }: WebsiteCardProps) {
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <Eye className="w-4 h-4 mr-2" />
-                    View
+                    <Link
+                      href={`/website/${website._id}`}
+                      target="_blank"
+                      className="flex items-center"
+                    >
+                      <Eye className="w-4 h-4 mr-2" />
+                      View
+                    </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem className="text-red-600">
                     <Trash2 className="w-4 h-4 mr-2" />
@@ -99,8 +105,14 @@ export default function WebsiteCard({ website }: WebsiteCardProps) {
               )}
               {website.user !== user?._id && (
                 <DropdownMenuItem>
-                  <Eye className="w-4 h-4 mr-2" />
-                  View
+                  <Link
+                    href={`/website/${website._id}`}
+                    target="_blank"
+                    className="flex items-center"
+                  >
+                    <Eye className="w-4 h-4 mr-2" />
+                    View
+                  </Link>
                 </DropdownMenuItem>
               )}
             </DropdownMenuContent>

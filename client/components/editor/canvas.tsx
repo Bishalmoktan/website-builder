@@ -13,11 +13,8 @@ export default function Canvas() {
     id: "canvas-droppable",
   });
 
-  console.log(currentWebsite);
-
   const blocks = currentWebsite?.blocks || [];
 
-  console.log(blocks);
   return (
     <div className="flex-1 bg-white overflow-auto">
       <div className="h-full relative">
@@ -54,12 +51,12 @@ export default function Canvas() {
             </div>
           ) : (
             <SortableContext
-              items={blocks.map((block) => block.id)}
+              items={blocks.map((block) => block._id)}
               strategy={verticalListSortingStrategy}
             >
               <div className="space-y-0">
                 {blocks.map((block) => (
-                  <SortableBlock key={block.id} block={block} />
+                  <SortableBlock key={block._id} block={block} />
                 ))}
               </div>
             </SortableContext>

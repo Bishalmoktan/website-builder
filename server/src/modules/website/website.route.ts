@@ -12,5 +12,5 @@ websiteRouter.get(
 );
 websiteRouter.post("/", isAuthenticated, websiteController.createWebsite);
 websiteRouter.get("/:id", isAuthenticated, websiteController.getWebsiteById);
-websiteRouter.put("/:id", isAuthenticated, websiteController.updateWebsite);
+websiteRouter.patch("/:id", isAuthenticated, websiteController.updateWebsite);
 websiteRouter.delete("/:id", isAuthenticated, websiteController.deleteWebsite);

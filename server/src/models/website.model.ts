@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 const BlockSchema = new Schema({
-  id: { type: String, required: true },
+  _id: { type: String, required: true },
   type: { type: String, required: true },
   content: { type: Schema.Types.Mixed },
   style: { type: Schema.Types.Mixed },

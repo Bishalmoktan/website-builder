@@ -55,3 +55,17 @@ export interface SignUpParams {
   email: string;
   password: string;
 }
+
+export interface CreateWebsiteParams {
+  title: string;
+  blocks: Block[];
+  theme: Theme;
+}
+
+export interface UpdateWebsiteParams {
+  _id: string;
+  title?: string;
+  isPublished?: boolean;
+  blocks?: Block[];
+  theme?: Theme;
+}

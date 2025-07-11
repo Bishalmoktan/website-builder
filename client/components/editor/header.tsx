@@ -1,36 +1,51 @@
 import useWebsiteStore from "@/store/use-website-store";
 import {
   Play,
-  Square,
   Save,
-  Eye,
   Settings,
   Download,
-  Home,
+  Edit,
+  ExternalLink,
 } from "lucide-react";
 import Logo from "../logo";
+import { updateWesbite } from "@/lib/service/website.service";
+import { toast } from "sonner";
+import { AxiosError } from "axios";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import Link from "next/link";
 
 export default function Header() {
   const {
     currentWebsite,
     isPreviewMode,
-    togglePreviewMode,
-    saveWebsite,
+    setPreviewMode,
     updateWebsiteTitle,
-    createNewWebsite,
+    setCurrentWebsite,
   } = useWebsiteStore();
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateWebsiteTitle(e.target.value);
   };
 
-  const handleSave = () => {
-    saveWebsite();
-    // Show success message (you could add a toast notification here)
+  const handleSave = async () => {
+    if (!currentWebsite) {
+      toast.error("No website data found!");
+      return;
+    }
+    try {
+      await updateWesbite(currentWebsite);
+      toast.success("Website updated successfully");
+    } catch (error) {
+      console.log(error);
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data.message);
+      } else {
+        toast.error("Something went wrong!");
+      }
+    }
   };
 
   const handleExport = () => {
-    // Implementation for exporting the website
     const exportData = {
       website: currentWebsite,
       exportedAt: new Date().toISOString(),
@@ -47,6 +62,48 @@ export default function Header() {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+  };
+
+  const handleUpdate = async () => {
+    const value = currentWebsite?.isPublished;
+    if (!currentWebsite) {
+      toast.error("No website data found!");
+      return;
+    }
+    try {
+      const res = await updateWesbite({
+        _id: currentWebsite._id,
+        isPublished: !value,
+      });
+
+      setCurrentWebsite(res.data);
+
+      if (value) {
+        toast.success(`Website unpublished successfully`);
+      } else {
+        toast.success(`Website published successfully`, {
+          description: (
+            <div>
+              Your website link:{" "}
+              <Link
+                className="text-blue-500 hover:underline"
+                target="_blank"
+                href={`/website/${currentWebsite._id}`}
+              >
+                {currentWebsite.title}
+              </Link>{" "}
+            </div>
+          ),
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data.message);
+      } else {
+        toast.error("Something went wrong!");
+      }
+    }
   };
 
   return (
@@ -76,7 +133,13 @@ export default function Header() {
           </button>
 
           <button
-            onClick={togglePreviewMode}
+            onClick={() => {
+              if (isPreviewMode) {
+                setPreviewMode(false);
+              } else {
+                setPreviewMode(true);
+              }
+            }}
             className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
               isPreviewMode
                 ? "bg-orange-600 text-white hover:bg-orange-700"
@@ -85,7 +148,7 @@ export default function Header() {
           >
             {isPreviewMode ? (
               <>
-                <Square size={16} />
+                <Edit size={16} />
                 <span>Edit</span>
               </>
             ) : (
@@ -106,10 +169,27 @@ export default function Header() {
             <span>Export</span>
           </button>
 
-          <button className="flex items-center space-x-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
-            <Settings size={16} />
-            <span>Settings</span>
-          </button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button
+                onClick={handleUpdate}
+                className="flex items-center space-x-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                <ExternalLink size={16} />
+                <span>
+                  {currentWebsite?.isPublished ? "Unpublish" : "Publish"}
+                </span>
+              </button>
+            </TooltipTrigger>
+
+            <TooltipContent>
+              {currentWebsite?.isPublished ? (
+                <p>Your website will be hidden from public</p>
+              ) : (
+                <p>Your website will be publicly visible</p>
+              )}
+            </TooltipContent>
+          </Tooltip>
         </div>
       </div>
     </header>

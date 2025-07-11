@@ -17,7 +17,7 @@ interface WebsiteStore {
 
   setCurrentWebsite: (website: Website | null) => void;
   setSelectedBlock: (block: Block | null) => void;
-  togglePreviewMode: () => void;
+  setPreviewMode: (value: boolean) => void;
 
   // Block actions
   addBlock: (block: Block) => void;
@@ -28,17 +28,7 @@ interface WebsiteStore {
   // Website actions
   updateWebsiteTitle: (title: string) => void;
   updateWebsiteTheme: (theme: Theme) => void;
-  saveWebsite: () => void;
-  loadWebsite: (id: string) => void;
-  createNewWebsite: (userId: string) => void;
 }
-
-const defaultTheme: Theme = {
-  primaryColor: "#0EA5E9",
-  secondaryColor: "#F97316",
-  fontFamily: "Inter",
-  backgroundColor: "#ffffff",
-};
 
 const useWebsiteStore = create<WebsiteStore>()(
   immer((set, get) => ({
@@ -59,9 +49,9 @@ const useWebsiteStore = create<WebsiteStore>()(
       set((state) => {
         state.selectedBlock = block;
       }),
-    togglePreviewMode: () =>
+    setPreviewMode: (value) =>
       set((state) => {
-        state.isPreviewMode = !state.isPreviewMode;
+        state.isPreviewMode = value;
       }),
 
     addBlock: (block) =>
@@ -119,47 +109,6 @@ const useWebsiteStore = create<WebsiteStore>()(
         state.currentWebsite.theme = theme;
         state.currentWebsite.updatedAt = new Date().toISOString();
       }),
-
-    saveWebsite: () => {
-      // save to database
-      const state = get();
-      if (state.currentWebsite) {
-        localStorage.setItem(
-          "currentWebsite",
-          JSON.stringify(state.currentWebsite)
-        );
-      }
-    },
-
-    loadWebsite: (id) => {
-      // load from backend
-      const saved = localStorage.getItem("currentWebsite");
-      if (saved) {
-        const website = JSON.parse(saved);
-        console.log("load", website);
-        set((state) => {
-          state.currentWebsite = website;
-          state.selectedBlock = null;
-        });
-      }
-    },
-
-    createNewWebsite: (userId) => {
-      const newWebsite: Website = {
-        _id: crypto.randomUUID(),
-        title: "My Travel Website",
-        isPublished: false,
-        blocks: [],
-        user: userId,
-        theme: defaultTheme,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
-      set((state) => {
-        state.currentWebsite = newWebsite;
-        state.selectedBlock = null;
-      });
-    },
   }))
 );
 

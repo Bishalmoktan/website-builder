@@ -12,7 +12,7 @@ interface SortableBlockProps {
 export default function SortableBlock({ block }: SortableBlockProps) {
   const { selectedBlock, setSelectedBlock, deleteBlock, isPreviewMode } =
     useWebsiteStore();
-  const isSelected = selectedBlock?.id === block.id;
+  const isSelected = selectedBlock?._id === block._id;
 
   const {
     attributes,
@@ -21,7 +21,7 @@ export default function SortableBlock({ block }: SortableBlockProps) {
     transform,
     transition,
     isDragging,
-  } = useSortable({ id: block.id });
+  } = useSortable({ id: block._id });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -64,7 +64,7 @@ export default function SortableBlock({ block }: SortableBlockProps) {
           <button
             onClick={(e) => {
               e.stopPropagation();
-              deleteBlock(block.id);
+              deleteBlock(block._id);
             }}
             className="p-1 hover:bg-red-100 rounded"
             title="Delete block"

@@ -14,7 +14,7 @@ import {
 
 export const blockTypes: BlockType[] = [
   {
-    id: "hero",
+    _id: "hero",
     name: "Hero Section",
     icon: Mountain,
     category: "headers",
@@ -35,7 +35,7 @@ export const blockTypes: BlockType[] = [
     },
   },
   {
-    id: "destinations",
+    _id: "destinations",
     name: "Destinations Grid",
     icon: MapPin,
     category: "content",
@@ -78,7 +78,7 @@ export const blockTypes: BlockType[] = [
     },
   },
   {
-    id: "testimonials",
+    _id: "testimonials",
     name: "Testimonials",
     icon: Users,
     category: "social",
@@ -111,7 +111,7 @@ export const blockTypes: BlockType[] = [
     },
   },
   {
-    id: "gallery",
+    _id: "gallery",
     name: "Photo Gallery",
     icon: Camera,
     category: "media",
@@ -145,7 +145,7 @@ export const blockTypes: BlockType[] = [
     },
   },
   {
-    id: "features",
+    _id: "features",
     name: "Features",
     icon: Star,
     category: "content",
@@ -181,7 +181,7 @@ export const blockTypes: BlockType[] = [
     },
   },
   {
-    id: "cta",
+    _id: "cta",
     name: "Call to Action",
     icon: Compass,
     category: "conversion",

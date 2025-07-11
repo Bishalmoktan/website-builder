@@ -23,7 +23,7 @@ export default function PropertiesPanel() {
   }
 
   const handleContentChange = (field: string, value: any) => {
-    updateBlock(selectedBlock.id, {
+    updateBlock(selectedBlock._id, {
       content: {
         ...selectedBlock.content,
         [field]: value,
@@ -32,7 +32,7 @@ export default function PropertiesPanel() {
   };
 
   const handleStyleChange = (field: string, value: any) => {
-    updateBlock(selectedBlock.id, {
+    updateBlock(selectedBlock._id, {
       style: {
         ...selectedBlock.style,
         [field]: value,

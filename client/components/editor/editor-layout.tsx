@@ -34,12 +34,12 @@ export default function EditorLayout() {
       over.id === "canvas-droppable"
     ) {
       const blockTypeId = active.data.current?.blockType;
-      const blockType = blockTypes.find((bt) => bt.id === blockTypeId);
+      const blockType = blockTypes.find((bt) => bt._id === blockTypeId);
 
       if (blockType) {
         const newBlock: Block = {
-          id: crypto.randomUUID(),
-          type: blockType.id,
+          _id: crypto.randomUUID(),
+          type: blockType._id,
           content: blockType.defaultContent,
           style: blockType.defaultStyle,
         };
@@ -56,10 +56,10 @@ export default function EditorLayout() {
       if (!currentWebsite) return;
 
       const oldIndex = currentWebsite.blocks.findIndex(
-        (block) => block.id === active.id
+        (block) => block._id === active.id
       );
       const newIndex = currentWebsite.blocks.findIndex(
-        (block) => block.id === over.id
+        (block) => block._id === over.id
       );
 
       if (oldIndex !== -1 && newIndex !== -1) {

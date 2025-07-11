@@ -9,8 +9,8 @@ interface DraggableBlockProps {
 function DraggableBlock({ blockType }: DraggableBlockProps) {
   const { attributes, listeners, setNodeRef, transform, isDragging } =
     useDraggable({
-      id: `draggable-${blockType.id}`,
-      data: { blockType: blockType.id },
+      id: `draggable-${blockType._id}`,
+      data: { blockType: blockType._id },
     });
 
   const style = {
@@ -68,7 +68,7 @@ export default function BlockSidebar() {
               {blockTypes
                 .filter((block) => block.category === category)
                 .map((blockType) => (
-                  <DraggableBlock key={blockType.id} blockType={blockType} />
+                  <DraggableBlock key={blockType._id} blockType={blockType} />
                 ))}
             </div>
           </div>
