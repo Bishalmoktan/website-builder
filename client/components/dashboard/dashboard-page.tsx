@@ -73,11 +73,11 @@ export default function Dashboard() {
               placeholder="Search websites..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 bg-white/80 backdrop-blur-sm border-gray-200"
+              className="pl-10 bg-white/80 py-6 backdrop-blur-sm border-gray-200"
             />
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex gap-2 items-center">
             <Button
               variant={filter === "all" ? "default" : "outline"}
               onClick={() => setFilter("all")}

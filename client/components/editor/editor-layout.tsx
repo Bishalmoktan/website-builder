@@ -15,14 +15,6 @@ import PropertiesPanel from "./properties-panel";
 export default function EditorLayout() {
   const { addBlock, moveBlock, setSelectedBlock } = useWebsiteStore();
 
-  const handleDragStart = (event: DragStartEvent) => {
-    // Optional: Add visual feedback when dragging starts
-  };
-
-  const handleDragOver = (event: DragOverEvent) => {
-    // Optional: Handle drag over events
-  };
-
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
 
@@ -69,11 +61,7 @@ export default function EditorLayout() {
   };
 
   return (
-    <DndContext
-      onDragStart={handleDragStart}
-      onDragOver={handleDragOver}
-      onDragEnd={handleDragEnd}
-    >
+    <DndContext onDragEnd={handleDragEnd}>
       <div className="flex h-screen bg-gray-100">
         <BlockSidebar />
         <Canvas />
