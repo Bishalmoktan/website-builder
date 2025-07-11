@@ -129,7 +129,7 @@ export default function Dashboard() {
         {websites.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {websites.map((website) => (
-              <WebsiteCard website={website} />
+              <WebsiteCard key={website._id} website={website} />
             ))}
           </div>
         ) : (

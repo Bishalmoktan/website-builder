@@ -38,6 +38,8 @@ export default function WebsiteCard({ website }: WebsiteCardProps) {
       <div className="relative">
         <Image
           src={randomImage() || "/placeholder.svg"}
+          width={500}
+          height={500}
           alt={website.title}
           className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
         />
