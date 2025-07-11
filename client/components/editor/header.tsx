@@ -8,6 +8,7 @@ import {
   Download,
   Home,
 } from "lucide-react";
+import Logo from "../logo";
 
 export default function Header() {
   const {
@@ -52,13 +53,7 @@ export default function Header() {
     <header className="bg-white border-b border-gray-200 px-6 py-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
-          <button
-            onClick={createNewWebsite}
-            className="flex items-center space-x-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
-          >
-            <Home size={16} />
-            <span>New Website</span>
-          </button>
+          <Logo />
 
           <div className="h-6 w-px bg-gray-300" />
 

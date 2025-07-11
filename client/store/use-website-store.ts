@@ -4,11 +4,17 @@ import { immer } from "zustand/middleware/immer";
 import { Block, Website, User, Theme } from "../types";
 
 interface WebsiteStore {
+  allWebsites: Website[];
+  userWebsites: Website[];
+
   currentWebsite: Website | null;
   selectedBlock: Block | null;
   isPreviewMode: boolean;
 
   // Actions
+  setAllWebsites: (websites: Website[]) => void;
+  setUserWebsites: (websites: Website[]) => void;
+
   setCurrentWebsite: (website: Website | null) => void;
   setSelectedBlock: (block: Block | null) => void;
   togglePreviewMode: () => void;
@@ -24,7 +30,7 @@ interface WebsiteStore {
   updateWebsiteTheme: (theme: Theme) => void;
   saveWebsite: () => void;
   loadWebsite: (id: string) => void;
-  createNewWebsite: () => void;
+  createNewWebsite: (userId: string) => void;
 }
 
 const defaultTheme: Theme = {
@@ -36,11 +42,15 @@ const defaultTheme: Theme = {
 
 const useWebsiteStore = create<WebsiteStore>()(
   immer((set, get) => ({
+    allWebsites: [],
+    userWebsites: [],
     currentWebsite: null,
     selectedBlock: null,
     user: null,
     isPreviewMode: false,
 
+    setAllWebsites: (websites) => set({ allWebsites: websites }),
+    setUserWebsites: (websites) => set({ userWebsites: websites }),
     setCurrentWebsite: (website) =>
       set((state) => {
         state.currentWebsite = website;
@@ -64,13 +74,13 @@ const useWebsiteStore = create<WebsiteStore>()(
     updateBlock: (id, updates) =>
       set((state) => {
         if (!state.currentWebsite) return;
-        const block = state.currentWebsite.blocks.find((b) => b.id === id);
+        const block = state.currentWebsite.blocks.find((b) => b._id === id);
         if (!block) return;
         if (updates.content) Object.assign(block.content, updates.content);
         if (updates.style) Object.assign(block.style, updates.style);
         state.currentWebsite.updatedAt = new Date().toISOString();
 
-        if (state.selectedBlock?.id === id) {
+        if (state.selectedBlock?._id === id) {
           state.selectedBlock = block;
         }
       }),
@@ -79,10 +89,10 @@ const useWebsiteStore = create<WebsiteStore>()(
       set((state) => {
         if (!state.currentWebsite) return;
         state.currentWebsite.blocks = state.currentWebsite.blocks.filter(
-          (b) => b.id !== id
+          (b) => b._id !== id
         );
         state.currentWebsite.updatedAt = new Date().toISOString();
-        if (state.selectedBlock?.id === id) {
+        if (state.selectedBlock?._id === id) {
           state.selectedBlock = null;
         }
       }),
@@ -134,11 +144,13 @@ const useWebsiteStore = create<WebsiteStore>()(
       }
     },
 
-    createNewWebsite: () => {
+    createNewWebsite: (userId) => {
       const newWebsite: Website = {
-        id: crypto.randomUUID(),
+        _id: crypto.randomUUID(),
         title: "My Travel Website",
+        isPublished: false,
         blocks: [],
+        user: userId,
         theme: defaultTheme,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),

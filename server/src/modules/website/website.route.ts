@@ -4,7 +4,12 @@ import * as websiteController from "./website.controller";
 
 export const websiteRouter = Router();
 
-websiteRouter.get("/", isAuthenticated, websiteController.getUserWebsites);
+websiteRouter.get("/", isAuthenticated, websiteController.getAllWebsites);
+websiteRouter.get(
+  "/my-listings",
+  isAuthenticated,
+  websiteController.getUserWebsites
+);
 websiteRouter.post("/", isAuthenticated, websiteController.createWebsite);
 websiteRouter.get("/:id", isAuthenticated, websiteController.getWebsiteById);
 websiteRouter.put("/:id", isAuthenticated, websiteController.updateWebsite);

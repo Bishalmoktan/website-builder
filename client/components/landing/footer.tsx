@@ -1,4 +1,5 @@
 import { Globe } from "lucide-react";
+import Logo from "../logo";
 
 export default function Footer() {
   return (
@@ -6,12 +7,7 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <Globe className="h-6 w-6 text-indigo-600" />
-              <span className="text-xl font-bold bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                TravelBuilder
-              </span>
-            </div>
+            <Logo />
             <p className="text-gray-500">
               The easiest way to create stunning travel websites without any
               coding knowledge.

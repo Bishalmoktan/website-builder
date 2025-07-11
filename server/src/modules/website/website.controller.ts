@@ -38,6 +38,17 @@ export const getUserWebsites = async (req: Request, res: Response) => {
   }
 };
 
+export const getAllWebsites = async (req: Request, res: Response) => {
+  try {
+    const websites = await websiteService.getAllWebsites();
+    return apiResponse(res, StatusCodes.OK, {
+      data: websites,
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const getWebsiteById = async (req: Request, res: Response) => {
   try {
     const website = await websiteService.getWebsiteById(req.params.id);

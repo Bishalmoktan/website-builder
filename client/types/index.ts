@@ -1,15 +1,17 @@
 export interface Block {
-  id: string;
+  _id: string;
   type: string;
   content: any;
   style: any;
 }
 
 export interface Website {
-  id: string;
+  _id: string;
   title: string;
+  isPublished: boolean;
   blocks: Block[];
   theme: Theme;
+  user: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -22,14 +24,14 @@ export interface Theme {
 }
 
 export interface User {
-  id: string;
+  _id: string;
   email: string;
   name: string;
   websites: Website[];
 }
 
 export interface BlockType {
-  id: string;
+  _id: string;
   name: string;
   icon: any;
   defaultContent: any;

@@ -1,3 +1,5 @@
+import Logo from "@/components/logo";
+
 export default function AuthLayout({
   children,
 }: {
@@ -6,10 +8,8 @@ export default function AuthLayout({
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-blue-100 flex items-center justify-center p-6">
       <div className="w-full max-w-6xl">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent mb-4">
-            TravelBuilder
-          </h1>
+        <div className="flex flex-col justify-center items-center gap-4 mb-12">
+          <Logo />
           <p className="text-xl text-gray-600">
             Create stunning travel websites with our drag-and-drop editor
           </p>

@@ -18,6 +18,7 @@ export interface IWebsite extends Document {
   title: string;
   blocks: (typeof BlockSchema)[];
   theme: typeof ThemeSchema;
+  isPublished: boolean;
   user: mongoose.Types.ObjectId;
 }
 
@@ -26,6 +27,7 @@ export const WebsiteSchema = new Schema<IWebsite>(
     title: { type: String, required: true },
     blocks: [BlockSchema],
     theme: ThemeSchema,
+    isPublished: { type: Boolean, default: false },
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },
   },
   { timestamps: true }
