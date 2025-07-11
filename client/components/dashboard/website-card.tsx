@@ -12,6 +12,11 @@ import { Calendar, Edit, Eye, MoreVertical, Trash2 } from "lucide-react";
 import { useUserStore } from "@/store/use-user-store";
 import Link from "next/link";
 import Image from "next/image";
+import { deleteWebsite } from "@/lib/service/website.service";
+import { toast } from "sonner";
+import { AxiosError } from "axios";
+import useWebsiteStore from "@/store/use-website-store";
+import { useRouter } from "next/navigation";
 
 interface WebsiteCardProps {
   website: Website;
@@ -30,6 +35,26 @@ const randomImage = () =>
 
 export default function WebsiteCard({ website }: WebsiteCardProps) {
   const { user } = useUserStore();
+  const { userWebsites, setUserWebsites } = useWebsiteStore();
+
+  const router = useRouter();
+
+  const handleDelete = async () => {
+    try {
+      await deleteWebsite(website._id);
+      const newUserWebsites = userWebsites.filter((w) => w._id !== website._id);
+      setUserWebsites(newUserWebsites);
+      router.refresh();
+      toast.success(`"${website.title}" deleted successfully`);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data.message);
+      } else {
+        toast.error("Something went wrong!");
+      }
+    }
+  };
+
   return (
     <Card
       key={website._id}
@@ -93,7 +118,10 @@ export default function WebsiteCard({ website }: WebsiteCardProps) {
                       View
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem className="text-red-600">
+                  <DropdownMenuItem
+                    onClick={handleDelete}
+                    className="text-red-600 cursor-pointer"
+                  >
                     <Trash2 className="w-4 h-4 mr-2" />
                     Delete
                   </DropdownMenuItem>

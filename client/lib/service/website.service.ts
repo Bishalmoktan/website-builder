@@ -45,3 +45,12 @@ export async function updateWesbite(data: UpdateWebsiteParams) {
     throw error;
   }
 }
+
+export async function deleteWebsite(id: string) {
+  try {
+    const res = await api.delete(`/api/v1/website/${id}`);
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+}

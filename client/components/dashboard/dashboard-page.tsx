@@ -10,7 +10,6 @@ import Navbar from "./navbar";
 import StatsCard from "./stats-card";
 import useWebsiteStore from "@/store/use-website-store";
 import { getAllWebsites, getUserWebsites } from "@/lib/service/website.service";
-import { useUserStore } from "@/store/use-user-store";
 import { Website } from "@/types";
 import WebsiteCard from "./website-card";
 
@@ -22,7 +21,6 @@ export default function Dashboard() {
 
   const { setUserWebsites, setAllWebsites, allWebsites, userWebsites } =
     useWebsiteStore();
-  const { user } = useUserStore();
 
   useEffect(() => {
     getAllWebsites().then((data) => setAllWebsites(data.data));
